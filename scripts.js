@@ -7,12 +7,13 @@ const GBP = 6.83
 const form = document.querySelector("form")
 const amount = document.querySelector("#amount")
 const currency = document.querySelector("#currency")
+const footer = document.querySelector("main footer") // Dentro do main ele vai pegar o footer
 
 // Manipulando o input amount para receber somente números.
 // Observando quando interagir.
 amount.addEventListener("input", () => {
   const hasCharacterRegex = /\D+/g // Criando regex.
-  amount.value = amount.value.replace(hasCharacterRegex, "") // Atribuimos por outro valor.
+  amount.value = amount.value.replace(hasCharacterRegex, "") // Atribuímos por outro valor.
 })
 
 // Capturando o evento de submit (enviar) no formulário.
@@ -35,9 +36,18 @@ form.onsubmit = (event) => {
 }
 
 // Função para converter a moeda.
-// amount: qual o valor total? (Ex: comprar 100 doláres)
+// amount: qual o valor total? (Ex: comprar 100 dólares)
 // price: qual o preço? (Ex: 1 dólar = R$ 5.06)
 // symbol: simbolo para exibir bonitinho.
 function convertCurrency(amount, price, symbol){
-  console.log(amount, price, symbol)
+  try {
+    // Aplica a classe que exibe o footer para mostrar o resultado.
+    footer.classList.add("show-result")
+  } catch (error) {
+    //Remove a classe do footer caso tenha algum erro.
+    footer.classList.remove("show-result")
+
+    console.log(error)
+    alert("Não foi possível converter! Tente novamente mais tarde.")
+  }
 }
