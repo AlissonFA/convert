@@ -8,6 +8,7 @@ const form = document.querySelector("form")
 const amount = document.querySelector("#amount")
 const currency = document.querySelector("#currency")
 const footer = document.querySelector("main footer") // Dentro do main ele vai pegar o footer
+const description = document.querySelector("#description")
 
 // Manipulando o input amount para receber somente números.
 // Observando quando interagir.
@@ -41,6 +42,7 @@ form.onsubmit = (event) => {
 // symbol: simbolo para exibir bonitinho.
 function convertCurrency(amount, price, symbol){
   try {
+    description.textContent = `${symbol} 1 = ${price}`
     // Aplica a classe que exibe o footer para mostrar o resultado.
     footer.classList.add("show-result")
   } catch (error) {
