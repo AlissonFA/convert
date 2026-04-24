@@ -14,7 +14,8 @@ const result = document.querySelector("#result")
 // Manipulando o input amount para receber somente números.
 // Observando quando interagir.
 amount.addEventListener("input", () => {
-  const hasCharacterRegex = /\D+/g // Criando regex.
+  // O [^\d,] significa: "Tudo que NÃO for dígito ou vírgula".
+  const hasCharacterRegex = /[^\d,]/g // Criando regex.
   amount.value = amount.value.replace(hasCharacterRegex, "") // Atribuímos por outro valor.
 })
 
@@ -43,11 +44,14 @@ form.onsubmit = (event) => {
 // symbol: simbolo para exibir bonitinho.
 function convertCurrency(amount, price, symbol){
   try {
+    // Trocamos a vírgula por ponto e convertemos para float.
+    const formattedAmount = parseFloat(amount.replace(",", "."))
+
     // Exibindo a cotação da moeda selecionada.
     description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
 
-    // Calcula o total.
-    let total = amount * price
+    // Calcula o total, usando o valor formatado.
+    let total = formattedAmount * price
 
     // Verifica se o resultado não é um número.
     if(isNaN(total)){
